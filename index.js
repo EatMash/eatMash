@@ -2,6 +2,7 @@ var express = require('express');
 var app = express();
 var config = require('./config');
 var Restaurant = require('./restaurant');
+var _ = require('underscore');
 var Yelp = require('yelp');
 var yelp = new Yelp({
   consumer_key: config.consumer_key,
@@ -22,6 +23,7 @@ app.get('/api', function (req, res) { // name, rating, url, phone, image_url, di
 	var minimum_rating = req.query.minrat;
 
 	var candidates = [];	
+	var returnValue = {};
 
 	yelp.search({ term: term, location: 'location', cll: cll })
 	.then(function (data) {
@@ -44,8 +46,13 @@ app.get('/api', function (req, res) { // name, rating, url, phone, image_url, di
 			}
 		}
 
+		if (!_.isEmpty(candidates)) {
+			var random_index = _.random(0, _.size(candidates) - 1);
+			returnValue = candidates[random_index];
+		}
+		
 		res.setHeader('Content-Type', 'application/json');
-		res.send(JSON.stringify(candidates));
+		res.send(JSON.stringify(returnValue));
 	})
 	.catch(function (err) {
 		console.error(err);
