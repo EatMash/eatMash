@@ -1,4 +1,5 @@
 function Restaurant(name, rating, url, phone, image_url, display_address, coordiate) {  
+
 	this.name = name;
 	this.rating = rating;
 	this.url = url;
