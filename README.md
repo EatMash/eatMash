@@ -13,7 +13,7 @@ $ node index.js
 ```
 
 ## Call API
-Geolocation (latitude and longitude) is required. Menu, minimum rating, and the number of restaurants are optional. 
+Geolocation (latitude and longitude) is required. Menu, minimum rating, and the number of restaurants are optional. By default, minimum rating and the number of restaurants are 0.0 and 1 respectively. 
 ```bash
 http://localhost:3000/api?term=<menu>&cll=<latitude>,<longitude>&minrat=<minimum_rating>&num=3
 ```
