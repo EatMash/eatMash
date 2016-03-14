@@ -22,6 +22,12 @@ app.get('/api', function (req, res) { // name, rating, url, phone, image_url, di
 	var cll = req.query.cll;
 	var minimum_rating = req.query.minrat;
 
+	if (isNaN(Number(minimum_rating))) {
+		res.setHeader('Content-Type', 'application/json');
+		res.send(JSON.stringify("{\"statusCode\":400,\"data\":\"{\"error\": {\"text\": \"minimum rating should be a number from 0.0 to 5.0\", \"id\": \"INVALID_PARAMETER\", \"field\": \"minrat\"}}\"}"));
+		return;
+	}
+
 	var candidates = [];	
 	var returnValue = {};
 
