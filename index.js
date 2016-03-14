@@ -22,6 +22,7 @@ app.get('/api', function (req, res) { // name, rating, url, phone, image_url, di
 	var cll = req.query.cll;
 	var minimum_rating = req.query.minrat;
 
+	if (minimum_rating == undefined) minimum_rating = 0.0;
 	if (isNaN(Number(minimum_rating)) || Number(minimum_rating) < 0 || Number(minimum_rating) > 5.0) {
 		res.setHeader('Content-Type', 'application/json');
 		res.send(JSON.stringify("{\"statusCode\":400,\"data\":\"{\"error\": {\"text\": \"minimum rating should be a number from 0.0 to 5.0\", \"id\": \"INVALID_PARAMETER\", \"field\": \"minrat\"}}\"}"));
@@ -31,7 +32,12 @@ app.get('/api', function (req, res) { // name, rating, url, phone, image_url, di
 	var candidates = [];	
 	var returnValue = {};
 
-	yelp.search({ term: term, location: 'location', cll: cll })
+	var queryObject = {};
+	if (term != undefined) queryObject.term = term;
+	queryObject.location = 'location';
+	queryObject.cll = cll;
+
+	yelp.search(queryObject)
 	.then(function (data) {
 
 		for (business of data.businesses) {
