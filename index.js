@@ -32,7 +32,7 @@ app.get('/api', function (req, res) { // name, rating, url, phone, image_url, di
 	}
 
 	var candidates = [];	
-	var returnValue = {};
+	var returnValues = [];
 
 	var queryObject = {};
 	if (term != undefined) queryObject.term = term;
@@ -64,9 +64,17 @@ app.get('/api', function (req, res) { // name, rating, url, phone, image_url, di
 			var random_index = _.random(0, _.size(candidates) - 1);
 			returnValue = candidates[random_index];
 		}
+
+		while(num > 0 && !_.isEmpty(candidates)) {
+			var random_index = _.random(0, _.size(candidates) - 1);
+			returnValues.push(candidates[random_index]);
+			candidates[random_index] = null;
+			num--;
+			candidates = _.compact(candidates);
+		}
 		
 		res.setHeader('Content-Type', 'application/json');
-		res.send(JSON.stringify(returnValue));
+		res.send(JSON.stringify(returnValues));
 	})
 	.catch(function (err) {
 		console.error(err);
