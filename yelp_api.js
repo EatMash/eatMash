@@ -11,52 +11,73 @@ var yelp = new Yelp({
 
 module.exports = {
 
-	call: function(term, cll, minimum_rating, num, res) {
+	call: function(term, location, minimum_rating, num, res) {
 
     	var candidates = [];	
 		var returnValues = [];
 
 		var queryObject = {};
 		if (term != undefined) queryObject.term = term;
-		queryObject.location = 'location';
-		queryObject.cll = cll;
+		queryObject.location = location;
+		//queryObject.radius_filter=1000
 
 		yelp.search(queryObject)
 		.then(function (data) {
 
-			for (business of data.businesses) {
+			var total_number = data.total;
+			var offset = null;
+			if (total_number <= 100) offset = 0;
+			else offset = _.random(0, 80);
 
-				if (business.rating >= minimum_rating) { 
+			queryObject.offset = offset;
 
-					var newRestaurant = new Restaurant(
-						business.name, 
-						business.rating,
-						business.url,
-						business.phone,
-						business.image_url,
-						business.location.display_address,
-						business.location.coordinate
-					);
+			//console.log(data);
 
-					candidates.push(newRestaurant);
+			console.log(total_number + ", " + offset);
+
+			yelp.search(queryObject)
+			.then(function (data) {
+
+				for (business of data.businesses) {
+
+					if (business.rating >= minimum_rating) { 
+
+						var newRestaurant = new Restaurant(
+							business.name, 
+							business.rating,
+							business.url,
+							business.phone,
+							business.image_url,
+							business.location.display_address,
+							business.location.coordinate
+						);
+
+						candidates.push(newRestaurant);
+					}
 				}
-			}
 
-			if (!_.isEmpty(candidates)) {
-				var random_index = _.random(0, _.size(candidates) - 1);
-				returnValue = candidates[random_index];
-			}
+				if (!_.isEmpty(candidates)) {
+					var random_index = _.random(0, _.size(candidates) - 1);
+					returnValue = candidates[random_index];
+				}
 
-			while(num > 0 && !_.isEmpty(candidates)) {
-				var random_index = _.random(0, _.size(candidates) - 1);
-				returnValues.push(candidates[random_index]);
-				candidates[random_index] = null;
-				num--;
-				candidates = _.compact(candidates);
-			}
-			
-			res.setHeader('Content-Type', 'application/json');
-			res.send(JSON.stringify(returnValues));
+				while(num > 0 && !_.isEmpty(candidates)) {
+					var random_index = _.random(0, _.size(candidates) - 1);
+					returnValues.push(candidates[random_index]);
+					candidates[random_index] = null;
+					num--;
+					candidates = _.compact(candidates);
+				}
+				
+				res.setHeader('Content-Type', 'application/json');
+				res.send(JSON.stringify(returnValues));
+			})
+			.catch(function (err) {
+				console.error(err);
+				res.setHeader('Content-Type', 'application/json');
+				res.send(JSON.stringify(err));
+			});
+
 		})
 		.catch(function (err) {
 			console.error(err);
@@ -64,7 +85,4 @@ module.exports = {
 			res.send(JSON.stringify(err));
 		});
   	}
-
 };
-
-
