@@ -49,7 +49,7 @@ app.get('/api', function (req, res) { // name, rating, url, phone, image_url, di
 
 });
 
-app.post('/confirm', function (req, res) {
+app.post('/api/confirm', function (req, res) {
 
 	var mashups = req.body.mashups;
 
@@ -87,14 +87,14 @@ app.post('/confirm', function (req, res) {
         }
 
         client.query(query, parameters, function(err, result) {
-                if (err) {
-                    console.log(err);
-                    return;
-                } 
+            if (err) {
+                console.log(err);
+                return;
+            } 
 
-                client.end();
-				res.status(200).json({success: true});
-				return;     
+            client.end();
+			res.status(200).json({success: true});
+			return;     
         });
     });
 });
