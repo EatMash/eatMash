@@ -1,5 +1,8 @@
+var uuid = require('uuid');
+
 function Restaurant(name, rating, url, phone, image_url, display_address, coordiate) {  
 	this.name = name;
+	this.uuid = uuid.v4();
 	this.rating = rating;
 	this.url = url;
 	this.phone = phone;
