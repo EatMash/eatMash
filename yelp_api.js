@@ -19,7 +19,6 @@ module.exports = {
 		var queryObject = {};
 		if (term != undefined) queryObject.term = term;
 		queryObject.location = location;
-		//queryObject.radius_filter=1000
 
 		yelp.search(queryObject)
 		.then(function (data) {
@@ -30,10 +29,6 @@ module.exports = {
 			else offset = _.random(0, 80);
 
 			queryObject.offset = offset;
-
-			//console.log(data);
-
-			console.log(total_number + ", " + offset);
 
 			yelp.search(queryObject)
 			.then(function (data) {
