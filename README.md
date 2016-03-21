@@ -27,11 +27,29 @@ http://localhost:3000/api?location=%22japan%20town%20san%20francisco%22&minrat=4
 ```bash
 [
   {
-    "name": "Yasukochi's Sweet Stop",
+    "name": "Therapeia Massage",
+    "uuid": "06b096f1-6200-4f0f-9a92-237388b6ba1f",
+    "rating": 4,
+    "url": "http://www.yelp.com/biz/therapeia-massage-san-francisco-2?utm_campaign=yelp_api&utm_medium=api_v2_search&utm_source=QfJXdX9KxsuHZ04ruLg3qg",
+    "phone": "4158854450",
+    "image_url": "https://s3-media1.fl.yelpcdn.com/bphoto/_D9M1NHSezeb07NBVZ89nQ/ms.jpg",
+    "display_address": [
+      "1801 Bush St",
+      "Japantown",
+      "San Francisco, CA 94109"
+    ],
+    "coordiate": {
+      "latitude": 37.7874665,
+      "longitude": -122.4273696
+    }
+  },
+  {
+    "name": "Super Mira Market",
+    "uuid": "91f38b2d-abf9-43c7-b983-6f37c9e49dea",
     "rating": 4.5,
-    "url": "http://www.yelp.com/biz/yasukochis-sweet-stop-san-francisco?utm_campaign=yelp_api&utm_medium=api_v2_search&utm_source=QfJXdX9KxsuHZ04ruLg3qg",
-    "phone": "4159318165",
-    "image_url": "https://s3-media4.fl.yelpcdn.com/bphoto/OELbKcU4nhmp4LiPT-Kivw/ms.jpg",
+    "url": "http://www.yelp.com/biz/super-mira-market-san-francisco?utm_campaign=yelp_api&utm_medium=api_v2_search&utm_source=QfJXdX9KxsuHZ04ruLg3qg",
+    "phone": "4159216529",
+    "image_url": "https://s3-media3.fl.yelpcdn.com/bphoto/5_A9ZaRjOn4-2LKLSNHPtQ/ms.jpg",
     "display_address": [
       "1790 Sutter St",
       "Japantown",
@@ -43,34 +61,21 @@ http://localhost:3000/api?location=%22japan%20town%20san%20francisco%22&minrat=4
     }
   },
   {
-    "name": "Lisa Bradbury Skincare Salon",
+    "name": "Margaretta Von Recklinghausen",
+    "uuid": "f96fd9b6-0203-4aad-95aa-378bb9929e7f",
     "rating": 5,
-    "url": "http://www.yelp.com/biz/lisa-bradbury-skincare-salon-san-francisco?utm_campaign=yelp_api&utm_medium=api_v2_search&utm_source=QfJXdX9KxsuHZ04ruLg3qg",
-    "phone": "4154417470",
-    "image_url": "https://s3-media2.fl.yelpcdn.com/bphoto/pP8Hqu7-z6oU0Piqt6he7g/ms.jpg",
+    "url": "http://www.yelp.com/biz/margaretta-von-recklinghausen-san-francisco-2?utm_campaign=yelp_api&utm_medium=api_v2_search&utm_source=QfJXdX9KxsuHZ04ruLg3qg",
+    "phone": "4152557384",
+    "image_url": "https://s3-media1.fl.yelpcdn.com/bphoto/R1ZdB914I8gtnx41Z4re6Q/ms.jpg",
     "display_address": [
-      "1756 Fillmore St",
+      "1801 Bush St",
+      "Ste 207",
       "Japantown",
-      "San Francisco, CA 94115"
+      "San Francisco, CA 94109"
     ],
     "coordiate": {
-      "latitude": 37.785988,
-      "longitude": -122.433022
-    }
-  },
-  {
-    "name": "Real Escape Game",
-    "rating": 4.5,
-    "url": "http://www.yelp.com/biz/real-escape-game-san-francisco-2?utm_campaign=yelp_api&utm_medium=api_v2_search&utm_source=QfJXdX9KxsuHZ04ruLg3qg",
-    "image_url": "https://s3-media1.fl.yelpcdn.com/bphoto/vMWdWOEa25IkYVSKcbfAaQ/ms.jpg",
-    "display_address": [
-      "1746 Post St",
-      "Japantown",
-      "San Francisco, CA 94115"
-    ],
-    "coordiate": {
-      "latitude": 37.7856199898632,
-      "longitude": -122.430602301523
+      "latitude": 37.7875022888184,
+      "longitude": -122.427215576172
     }
   }
 ]
