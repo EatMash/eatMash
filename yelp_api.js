@@ -1,4 +1,5 @@
 var config = require('./config');
+var pg = require('pg');
 var Restaurant = require('./restaurant');
 var _ = require('underscore');
 var Yelp = require('yelp');
