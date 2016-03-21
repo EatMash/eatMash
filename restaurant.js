@@ -1,6 +1,6 @@
 var uuid = require('uuid');
 
-function Restaurant(name, rating, url, phone, image_url, display_address, coordiate) {  
+function Restaurant(name, rating, url, phone, image_url, display_address, coordinate) {  
 	this.name = name;
 	this.uuid = uuid.v4();
 	this.rating = rating;
@@ -8,7 +8,7 @@ function Restaurant(name, rating, url, phone, image_url, display_address, coordi
 	this.phone = phone;
 	this.image_url = image_url;
 	this.display_address = display_address;
-	this.coordiate = coordiate;
+	this.coordinate = coordinate;
 }
 
 module.exports = Restaurant;
