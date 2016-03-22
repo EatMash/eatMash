@@ -6,11 +6,11 @@ module.exports = {
 	token_secret: 'jtklLDOecbZuR33MYHglnvPHix8',
 
 	connectionString: {
-		user: "gecfttgmzfrumj",
-		password: "XPJdmQ6Cc2neQxMuAJyLYD2bJh",
-		database: "d7ijg2sjkeijuu",
+		user: "dsfalbzhjkdspg",
+		password: "ysuAiicpm4uzCZmarXi_EBgcIa",
+		database: "ddp7f2umj99odv",
 		port: 5432,
-		host: "ec2-107-22-248-209.compute-1.amazonaws.com",
+		host: "ec2-54-83-22-48.compute-1.amazonaws.com",
 		ssl: true
 	}
 
