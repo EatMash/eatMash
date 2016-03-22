@@ -5,6 +5,8 @@ var Restaurant = require('./restaurant');
 var config = require('./config');
 var pg = require('pg');
 
+var PORT = process.env.PORT || 3000;
+
 var app = express();
 app.use(bodyParser());
 
@@ -148,6 +150,6 @@ app.post('/api/confirm', function(req, res) {
     });
 });
 
-app.listen(3000, function() {
-    console.log('Example app listening on port 3000!');
+app.listen(PORT, function() {
+    console.log('running...');
 });
