@@ -100,9 +100,9 @@ var call_yelp_api = function(query_object, location, minrat, callback) {
 };
 
 module.exports = {
-  call2: call_yelp_api,
+  call_v2: call_yelp_api,
 
-	call: function(term, location, minimum_rating, num, res) {
+	call_v1: function(term, location, minimum_rating, num, res) {
 
 		var candidates = [];
 		var returnValues = [];

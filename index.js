@@ -61,10 +61,10 @@ var isParametersValid = function(req, res) {
 };
 
 //
-// Request params:
+// Return params:
 //  name, rating, url, phone, image_url, display_address, coordinate
 //
-app.get('/api', function(req, res) {
+app.get('/v1/api', function(req, res) {
   if (!isParametersValid(req, res))
     return;
 
@@ -73,21 +73,22 @@ app.get('/api', function(req, res) {
   var minimum_rating = req.query.minrat || 0.0;
   var num = req.query.num || 1;
 
-  yelp_api.call(term, location, minimum_rating, num, res);
+  yelp_api.call_v1(term, location, minimum_rating, num, res);
 });
 
 //
-// Request params:
+// Return params:
 //  same as /api
 //
-app.get('/api/test', function(req, res) {
+app.get('/v2/api', function(req, res) {
   if (!isParametersValid(req, res))
     return;
 
-  var location = req.query.location;
   var breakfast_term = req.query.breakfast_term || "";
   var lunch_term = req.query.lunch_term || "";
   var dinner_term = req.query.dinner_term || "";
+
+  var location = req.query.location;
   var minimum_rating = req.query.minrat || 0.0;
   var num = req.query.num || 1;
 
@@ -98,7 +99,7 @@ app.get('/api/test', function(req, res) {
   };
 
   console.log(query_object);
-  yelp_api.call2(query_object, location, minimum_rating, function(data) {
+  yelp_api.call_v2(query_object, location, minimum_rating, function(data) {
     // TODO
     // Need to check `data.err` in order to make sure Yelp API returns
     // correct data without any API errors.
