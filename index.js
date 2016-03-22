@@ -16,40 +16,96 @@ app.get('/', function(req, res) {
 });
 
 // app.post('/test', function (req, res) {
-
+//
 // 	var term = req.body.term;
 // 	var cll = req.body.cll;
 // 	var minimum_rating = req.body.minrat;
 // 	var accepted = req.body.accepted;
 // 	var not_accepted = req.body.not_accepted;
 // 	var num = 1;
-
+//
 // 	if (minimum_rating == undefined) minimum_rating = 0.0;
 //   	if (isNaN(Number(minimum_rating)) || Number(minimum_rating) < 0 || Number(minimum_rating) > 5.0) {
 // 		res.setHeader('Content-Type', 'application/json');
 // 		res.send(JSON.stringify("{\"statusCode\":400,\"data\":\"{\"error\": {\"text\": \"minimum rating should be a number from 0.0 to 5.0\", \"id\": \"INVALID_PARAMETER\", \"field\": \"minrat\"}}\"}"));
 // 		return;
 // 	}
-
+//
 // });
 
-app.get('/api', function(req, res) { // name, rating, url, phone, image_url, display_address, coordinate
+//
+// Param validater
+//
+var isParametersValid = function(req, res) {
+  var isParamValid =
+    isNaN(Number(req.query.minrat)) ||
+    Number(req.query.minrat) < 0 ||
+    Number(req.query.minrat) > 5.0;
 
-    var term = req.query.term;
-    var location = req.query.location;
-    var minimum_rating = req.query.minrat;
-    var num = req.query.num;
+  if (isParamValid) {
+    res.setHeader('Content-Type', 'application/json');
+    res.send(JSON.stringify({
+      statusCode: 400,
+      data: {
+        error: {
+          text: "minimum rating should be a number from 0.0 to 5.0",
+          id: "INVALID_PARAMETER",
+          field: "minrat"
+        }
+      }
+    }));
+    return false;
+  }
 
-    if (minimum_rating == undefined) minimum_rating = 0.0;
-    if (num == undefined) num = 1;
-    if (isNaN(Number(minimum_rating)) || Number(minimum_rating) < 0 || Number(minimum_rating) > 5.0) {
-        res.setHeader('Content-Type', 'application/json');
-        res.send(JSON.stringify("{\"statusCode\":400,\"data\":\"{\"error\": {\"text\": \"minimum rating should be a number from 0.0 to 5.0\", \"id\": \"INVALID_PARAMETER\", \"field\": \"minrat\"}}\"}"));
-        return;
-    }
+  return true
+};
 
-    yelp_api.call(term, location, minimum_rating, num, res);
+//
+// Request params:
+//  name, rating, url, phone, image_url, display_address, coordinate
+//
+app.get('/api', function(req, res) {
+  if (!isParametersValid(req, res))
+    return;
 
+  var term = req.query.term;
+  var location = req.query.location;
+  var minimum_rating = req.query.minrat || 0.0;
+  var num = req.query.num || 1;
+
+  yelp_api.call(term, location, minimum_rating, num, res);
+});
+
+//
+// Request params:
+//  same as /api
+//
+app.get('/api/test', function(req, res) {
+  if (!isParametersValid(req, res))
+    return;
+
+  var location = req.query.location;
+  var breakfast_term = req.query.breakfast_term || "";
+  var lunch_term = req.query.lunch_term || "";
+  var dinner_term = req.query.dinner_term || "";
+  var minimum_rating = req.query.minrat || 0.0;
+  var num = req.query.num || 1;
+
+  var query_object = {
+    breakfast: breakfast_term,
+    lunch: lunch_term,
+    dinner: dinner_term
+  };
+
+  console.log(query_object);
+  yelp_api.call2(query_object, location, minimum_rating, function(data) {
+    // TODO
+    // Need to check `data.err` in order to make sure Yelp API returns
+    // correct data without any API errors.
+
+    res.setHeader('Content-Type', 'application/json');
+    res.send(JSON.stringify(data.res));
+  });
 });
 
 app.get('/api/mashups', function(req, res) {
