@@ -7,7 +7,7 @@ $ npm install
 ```
 
 ## Run
-Run the backend server. (This will be eventually running on Heroku. Currently, running only locally. )
+Run the backend server. Currently the app is running on Heroku. (eatmash.herokuapp.com)
 ```bash
 $ node index.js
 ```
@@ -15,12 +15,12 @@ $ node index.js
 ## Call API (GET)
 Location is required. Menu, minimum rating, and the number of restaurants are optional. By default, minimum rating and the number of restaurants are 0.0 and 1 respectively. 
 ```bash
-http://localhost:3000/api?term=<menu>&location="<address>"&minrat=<minimum_rating>&num=3
+http://eatmash.herokuapp.com/api?term=<menu>&location="<address>"&minrat=<minimum_rating>&num=3
 ```
 
 ### Request Example
 ```bash
-http://localhost:3000/api?location=%22japan%20town%20san%20francisco%22&minrat=4&num=3
+http://eatmash.herokuapp.com/api?location=%22japan%20town%20san%20francisco%22&minrat=4&num=3
 ```
 
 ### Response Example
@@ -83,7 +83,7 @@ http://localhost:3000/api?location=%22japan%20town%20san%20francisco%22&minrat=4
 ## Confirm Call API (POST)
 A user confirms a set of randomly created mashups. Then, the mashups are stored in the database. The mashups are sent in a body. 
 ```bash
-localhost:3000/api/confirm
+eatmash.herokuapp.com/api/confirm
 ```
 Body
 ```bash
@@ -148,12 +148,12 @@ Body
 ## Get the Most Recent N Mashups API (GET)
 Retrieve the most recent N mashups from the database. 
 ```bash
-localhost:3000/api/mashups?num=<number>
+eatmash.herokuapp.com/api/mashups?num=<number>
 ```
 
 ### Request Example
 ```bash
-localhost:3000/api/mashups?num=2
+eatmash.herokuapp.com/api/mashups?num=2
 ```
 
 ### Response Example
