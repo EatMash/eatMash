@@ -144,3 +144,46 @@ Body
   ]
 }
 ```
+
+## Get the Most Recent N Mashups API (GET)
+Retrieve the most recent N mashups from the database. 
+```bash
+localhost:3000/api/mashups?num=<number>
+```
+
+### Request Example
+```bash
+localhost:3000/api/mashups?num=2
+```
+
+### Response Example
+```bash
+[
+  {
+    "name": "CAREMORE Movers and Storage",
+    "uuid": "4156e6cf-5988-43b1-8f54-d29d8c9a5239",
+    "rating": 5,
+    "url": "http://www.yelp.com/biz/caremore-movers-and-storage-san-francisco?utm_campaign=yelp_api&utm_medium=api_v2_search&utm_source=QfJXdX9KxsuHZ04ruLg3qg",
+    "phone": "4158228547",
+    "image_url": "https://s3-media3.fl.yelpcdn.com/bphoto/ePdFBj8Hh700Mfg6dBGxLw/ms.jpg",
+    "display_address": "{\"1511 Gough St\",\"Ste 103\",\"Japantown\",\"San Francisco, CA 94109\"}",
+    "coordinate": {
+      "latitude": "37.787628",
+      "longitude": "-122.425507"
+    }
+  },
+  {
+    "name": "Opaque - Dining In the Dark",
+    "uuid": "d4010429-66ea-4079-b319-2b62a92902c6",
+    "rating": 4.5,
+    "url": "http://www.yelp.com/biz/opaque-dining-in-the-dark-san-francisco-2?utm_campaign=yelp_api&utm_medium=api_v2_search&utm_source=QfJXdX9KxsuHZ04ruLg3qg",
+    "phone": "8007101270",
+    "image_url": "https://s3-media4.fl.yelpcdn.com/bphoto/hvG65EItF91ftX83az9SVg/ms.jpg",
+    "display_address": "{\"Hotel Majestic\",\"1500 Sutter St\",\"Japantown\",\"San Francisco, CA 94109\"}",
+    "coordinate": {
+      "latitude": "37.7872467041016",
+      "longitude": "-122.425430297852"
+    }
+  }
+]
+```
