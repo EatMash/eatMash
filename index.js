@@ -70,13 +70,8 @@ app.get('/api', function(req, res) {
 
   var term = req.query.term;
   var location = req.query.location;
-  var minimum_rating = req.query.minrat;
-  var num = req.query.num;
-
-  if (minimum_rating == undefined)
-    minimum_rating = 0.0;
-  if (num == undefined)
-    num = 1;
+  var minimum_rating = req.query.minrat || 0.0;
+  var num = req.query.num || 1;
 
   yelp_api.call(term, location, minimum_rating, num, res);
 });
@@ -89,17 +84,12 @@ app.get('/api/test', function(req, res) {
   if (!isParametersValid(req, res))
     return;
 
+  var location = req.query.location;
   var breakfast_term = req.query.breakfast_term || "";
   var lunch_term = req.query.lunch_term || "";
   var dinner_term = req.query.dinner_term || "";
-  var location = req.query.location;
-  var minimum_rating = req.query.minrat;
-  var num = req.query.num;
-
-  if (minimum_rating == undefined)
-    minimum_rating = 0.0;
-  if (num == undefined)
-    num = 1;
+  var minimum_rating = req.query.minrat || 0.0;
+  var num = req.query.num || 1;
 
   var query_object = {
     breakfast: breakfast_term,
