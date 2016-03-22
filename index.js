@@ -1,6 +1,7 @@
 var express = require('express');
 var bodyParser = require('body-parser');
 var yelp_api = require('./yelp_api');
+var Restaurant = require('./restaurant');
 var config = require('./config');
 var pg = require('pg');
 
@@ -47,6 +48,49 @@ app.get('/api', function(req, res) { // name, rating, url, phone, image_url, dis
 
     yelp_api.call(term, location, minimum_rating, num, res);
 
+});
+
+app.get('/api/mashups', function(req, res) {
+
+    var num = req.query.num;
+    var results = [];
+
+    pg.connect(config.connectionString, function(err, client, done) {
+
+        if (err) {
+            done();
+            console.log(err);
+            return res.status(500).json({
+                success: false,
+                data: err
+            });
+        }
+
+        var query = client.query("select * from mashups order by timestamp desc limit " + num);
+
+        query.on('row', function(row) {
+
+            var coordinate = {};
+            coordinate.latitude = row.latitude;
+            coordinate.longitude = row.longitude;
+
+            var newRestaurant = new Restaurant(
+                row.name,
+                row.rating,
+                row.url,
+                row.phone,
+                row.image_url,
+                row.display_address,
+                coordinate
+            );
+            results.push(newRestaurant);
+        });
+
+        query.on('end', function() {
+            done();
+            return res.json(results);
+        });
+    });
 });
 
 app.post('/api/confirm', function(req, res) {
