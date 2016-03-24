@@ -99,6 +99,8 @@ var call_yelp_api = function(query_object, location, minrat, callback) {
   }).end();
 };
 
+var uuid_buffer = {};
+
 module.exports = {
   call_v2: call_yelp_api,
 
@@ -150,6 +152,7 @@ module.exports = {
 						while (num > 0 && !_.isEmpty(candidates)) {
 							var random_index = _.random(0, _.size(candidates) - 1);
 							returnValues.push(candidates[random_index]);
+							uuid_buffer[candidates[random_index].uuid] = candidates[random_index];
 							candidates[random_index] = null;
 							num--;
 							candidates = _.compact(candidates);
@@ -170,5 +173,7 @@ module.exports = {
 				res.setHeader('Content-Type', 'application/json');
 				res.send(JSON.stringify(err));
 			});
-	}
+	}, 
+
+	buffer: uuid_buffer
 };
