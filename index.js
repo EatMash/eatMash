@@ -154,7 +154,7 @@ app.get('/api/mashups', function(req, res) {
 
 app.post('/api/confirm', function(req, res) {
 
-    var mashups = req.body.mashups;
+    var uuid = req.body.uuid;
 
     pg.connect(config.connectionString, function(err, client, done) {
 
@@ -170,7 +170,7 @@ app.post('/api/confirm', function(req, res) {
         var query = "INSERT INTO mashups(name, uuid, rating, url, phone, image_url, display_address, latitude, longitude) ";
         var parameters = [];
 
-        for (var i = 0; i < mashups.length; i++) {
+        for (var i = 0; i < uuid.length; i++) {
 
             if (i == 0) query += " values";
             else query += ", ";
@@ -181,15 +181,17 @@ app.post('/api/confirm', function(req, res) {
                 else query += ", $" + (j + i * 9);
             }
 
-            parameters.push(mashups[i].name);
-            parameters.push(mashups[i].uuid);
-            parameters.push(mashups[i].rating);
-            parameters.push(mashups[i].url);
-            parameters.push(mashups[i].phone);
-            parameters.push(mashups[i].image_url);
-            parameters.push(mashups[i].display_address);
-            parameters.push(mashups[i].coordinate.latitude);
-            parameters.push(mashups[i].coordinate.longitude);
+            parameters.push(yelp_api.buffer[uuid[i]].name);
+            parameters.push(yelp_api.buffer[uuid[i]].uuid);
+            parameters.push(yelp_api.buffer[uuid[i]].rating);
+            parameters.push(yelp_api.buffer[uuid[i]].url);
+            parameters.push(yelp_api.buffer[uuid[i]].phone);
+            parameters.push(yelp_api.buffer[uuid[i]].image_url);
+            parameters.push(yelp_api.buffer[uuid[i]].display_address);
+            parameters.push(yelp_api.buffer[uuid[i]].coordinate.latitude);
+            parameters.push(yelp_api.buffer[uuid[i]].coordinate.longitude);
+
+            delete yelp_api.buffer[uuid[i]];
         }
 
         client.query(query, parameters, function(err, result) {
