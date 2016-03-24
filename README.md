@@ -12,75 +12,152 @@ Run the backend server. Currently the app is running on Heroku. (eatmash.herokua
 $ node index.js
 ```
 
-## Call API (GET)
-Location is required. Menu, minimum rating, and the number of restaurants are optional. By default, minimum rating and the number of restaurants are 0.0 and 1 respectively. 
+## Get randomly chosen mashups for the first time (GET)
+Location is required. Breakfast, lunch, dinner menu and minimum rating are optional. By default, minimum rating is 0.0.  
 ```bash
-http://eatmash.herokuapp.com/api?term=<menu>&location="<address>"&minrat=<minimum_rating>&num=3
+eatmash.herokuapp.com/api?breakfast_term="<breakfast menu>"&lunch_term="<lunch menu>"&dinner_term="<dinner menu>"&location="<location>"&minrat=<minimum rating>
 ```
 
 ### Request Example
 ```bash
-http://eatmash.herokuapp.com/api?location=%22japan%20town%20san%20francisco%22&minrat=4&num=3
+eatmash.herokuapp.com/api?breakfast_term="american"&lunch_term="italian"&dinner_term="japanese"&location="san francisco"&minrat=3.0
 ```
 
 ### Response Example
 ```bash
 [
   {
-    "name": "Therapeia Massage",
-    "uuid": "06b096f1-6200-4f0f-9a92-237388b6ba1f",
+    "name": "Front Door Cafe",
+    "uuid": "2da8ba97-8246-4e4b-bdc8-7295179d256d",
     "rating": 4,
-    "url": "http://www.yelp.com/biz/therapeia-massage-san-francisco-2?utm_campaign=yelp_api&utm_medium=api_v2_search&utm_source=QfJXdX9KxsuHZ04ruLg3qg",
-    "phone": "4158854450",
-    "image_url": "https://s3-media1.fl.yelpcdn.com/bphoto/_D9M1NHSezeb07NBVZ89nQ/ms.jpg",
+    "url": "http://www.yelp.com/biz/front-door-cafe-san-francisco?utm_campaign=yelp_api&utm_medium=api_v2_search&utm_source=QfJXdX9KxsuHZ04ruLg3qg",
+    "phone": "4159893244",
+    "image_url": "https://s3-media1.fl.yelpcdn.com/bphoto/tswgR9oi6CB83ZkkBnUpJg/ms.jpg",
     "display_address": [
-      "1801 Bush St",
-      "Japantown",
-      "San Francisco, CA 94109"
+      "1 Front St",
+      "Financial District",
+      "San Francisco, CA 94111"
     ],
-    "coordiate": {
-      "latitude": 37.7874665,
-      "longitude": -122.4273696
+    "coordinate": {
+      "latitude": 37.791931,
+      "longitude": -122.398573
     }
   },
   {
-    "name": "Super Mira Market",
-    "uuid": "91f38b2d-abf9-43c7-b983-6f37c9e49dea",
+    "name": "Il Casaro Pizzeria & Mozzarella Bar",
+    "uuid": "808764e5-3470-483d-b547-aed3f3b302a3",
     "rating": 4.5,
-    "url": "http://www.yelp.com/biz/super-mira-market-san-francisco?utm_campaign=yelp_api&utm_medium=api_v2_search&utm_source=QfJXdX9KxsuHZ04ruLg3qg",
-    "phone": "4159216529",
-    "image_url": "https://s3-media3.fl.yelpcdn.com/bphoto/5_A9ZaRjOn4-2LKLSNHPtQ/ms.jpg",
+    "url": "http://www.yelp.com/biz/il-casaro-pizzeria-and-mozzarella-bar-san-francisco?utm_campaign=yelp_api&utm_medium=api_v2_search&utm_source=QfJXdX9KxsuHZ04ruLg3qg",
+    "phone": "4156779455",
+    "image_url": "https://s3-media3.fl.yelpcdn.com/bphoto/K62xCcAyKVskvClKvAwz_A/ms.jpg",
     "display_address": [
-      "1790 Sutter St",
-      "Japantown",
-      "San Francisco, CA 94115"
+      "348 Columbus Ave",
+      "Russian Hill",
+      "San Francisco, CA 94133"
     ],
-    "coordiate": {
-      "latitude": 37.78673,
-      "longitude": -122.42978
+    "coordinate": {
+      "latitude": 37.7984832,
+      "longitude": -122.4073981
     }
   },
   {
-    "name": "Margaretta Von Recklinghausen",
-    "uuid": "f96fd9b6-0203-4aad-95aa-378bb9929e7f",
-    "rating": 5,
-    "url": "http://www.yelp.com/biz/margaretta-von-recklinghausen-san-francisco-2?utm_campaign=yelp_api&utm_medium=api_v2_search&utm_source=QfJXdX9KxsuHZ04ruLg3qg",
-    "phone": "4152557384",
-    "image_url": "https://s3-media1.fl.yelpcdn.com/bphoto/R1ZdB914I8gtnx41Z4re6Q/ms.jpg",
+    "name": "Takoba",
+    "uuid": "ca67779f-7ada-4c4e-8090-04e024ec4c7c",
+    "rating": 4.5,
+    "url": "http://www.yelp.com/biz/takoba-san-francisco?utm_campaign=yelp_api&utm_medium=api_v2_search&utm_source=QfJXdX9KxsuHZ04ruLg3qg",
+    "phone": "4153610448",
+    "image_url": "https://s3-media3.fl.yelpcdn.com/bphoto/GJBL9MxXsHWIXIlktWuT_w/ms.jpg",
     "display_address": [
-      "1801 Bush St",
-      "Ste 207",
-      "Japantown",
-      "San Francisco, CA 94109"
+      "John Colins Lounge",
+      "138 Minna St",
+      "Financial District",
+      "San Francisco, CA 94105"
     ],
-    "coordiate": {
-      "latitude": 37.7875022888184,
-      "longitude": -122.427215576172
+    "coordinate": {
+      "latitude": 37.78704,
+      "longitude": -122.40044
     }
   }
 ]
 ```
-## Confirm Call API (POST)
+
+## Get randomly chosen mashups from the second time (POST)
+When a user does not like a set of randomly chosen mashups, he is given another set of mashups.  
+```bash
+eatmash.herokuapp.com/api/new
+```
+Body. Body includes query_object, location, minimum_rating, and an array of uuids that the user did not like. 
+```bash
+{
+    "query_object": {
+        "breakfast": "american",
+        "lunch": "japanese",
+        "dinner": "italian"
+    },
+    "location": "san francisco",
+    "minimum_rating": 3.0,
+    "uuids": ["b380228e-a6d2-46b2-9e8c-eeffca9fd8e2", "b9b04cab-5d24-4475-aa31-2db3a51c9fc9", "5ec63bb7-12d2-49d0-b62f-1f289fa98202"]
+}
+```
+
+### Response Example
+```bash
+[
+  {
+    "name": "Taylor Street Coffee Shop",
+    "uuid": "66653cb2-e94a-4e08-b445-c14f60893a1d",
+    "rating": 4,
+    "url": "http://www.yelp.com/biz/taylor-street-coffee-shop-san-francisco?utm_campaign=yelp_api&utm_medium=api_v2_search&utm_source=QfJXdX9KxsuHZ04ruLg3qg",
+    "phone": "4155674031",
+    "image_url": "https://s3-media2.fl.yelpcdn.com/bphoto/QiMWdBZy92718u2qRkxFIw/ms.jpg",
+    "display_address": [
+      "375 Taylor St",
+      "Tenderloin",
+      "San Francisco, CA 94102"
+    ],
+    "coordinate": {
+      "latitude": 37.7856803,
+      "longitude": -122.4114826
+    }
+  },
+  {
+    "name": "Mifune Restaurant",
+    "uuid": "70e2b3b0-29ec-4a67-9354-f578e6f4691e",
+    "rating": 3,
+    "url": "http://www.yelp.com/biz/mifune-restaurant-san-francisco?utm_campaign=yelp_api&utm_medium=api_v2_search&utm_source=QfJXdX9KxsuHZ04ruLg3qg",
+    "phone": "4159220337",
+    "image_url": "https://s3-media4.fl.yelpcdn.com/bphoto/zOrhTQL6ZY_wHURMJCamHQ/ms.jpg",
+    "display_address": [
+      "1737 Post St",
+      "Japantown",
+      "San Francisco, CA 94115"
+    ],
+    "coordinate": {
+      "latitude": 37.785345,
+      "longitude": -122.430272
+    }
+  },
+  {
+    "name": "Capannina",
+    "uuid": "352b55d3-9c79-44ef-b415-4b414c40328f",
+    "rating": 4,
+    "url": "http://www.yelp.com/biz/capannina-san-francisco?utm_campaign=yelp_api&utm_medium=api_v2_search&utm_source=QfJXdX9KxsuHZ04ruLg3qg",
+    "phone": "4154098001",
+    "image_url": "https://s3-media1.fl.yelpcdn.com/bphoto/0VCA8oPf5emOqPkRfLm5HQ/ms.jpg",
+    "display_address": [
+      "1809 Union St",
+      "Marina/Cow Hollow",
+      "San Francisco, CA 94123"
+    ],
+    "coordinate": {
+      "latitude": 37.7977488,
+      "longitude": -122.4291735
+    }
+  }
+]
+```
+
+## Confirm the randomly chosen mashups (POST)
 A user confirms a set of randomly created mashups. Then, the mashups are stored in the database. The mashups are sent in a body. 
 ```bash
 eatmash.herokuapp.com/api/confirm
@@ -88,11 +165,11 @@ eatmash.herokuapp.com/api/confirm
 Body
 ```bash
 {
-    "uuid": ["5821f6a2-8fc3-4653-b33b-cb1b256e012f", "bebd8f5f-3a3c-43a0-a30f-b8c504e1af0e"]
+    "uuid": ["66653cb2-e94a-4e08-b445-c14f60893a1d", "70e2b3b0-29ec-4a67-9354-f578e6f4691e", "352b55d3-9c79-44ef-b415-4b414c40328f"]
 }
 ```
 
-## Get the Most Recent N Mashups API (GET)
+## Get the most recent N mashups (GET)
 Retrieve the most recent N mashups from the database. 
 ```bash
 eatmash.herokuapp.com/api/mashups?num=<number>
