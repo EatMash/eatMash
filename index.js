@@ -128,7 +128,7 @@ app.get('/api/mashups', function(req, res) {
 
 app.post('/api/confirm', function(req, res) {
 
-    var uuid = req.body.uuid;
+    var uuids = req.body.uuids;
 
     pg.connect(config.connectionString, function(err, client, done) {
 
@@ -144,7 +144,7 @@ app.post('/api/confirm', function(req, res) {
         var query = "INSERT INTO mashups(name, uuid, rating, url, phone, image_url, display_address, latitude, longitude) ";
         var parameters = [];
 
-        for (var i = 0; i < uuid.length; i++) {
+        for (var i = 0; i < uuids.length; i++) {
 
             if (i == 0) query += " values";
             else query += ", ";
@@ -155,17 +155,17 @@ app.post('/api/confirm', function(req, res) {
                 else query += ", $" + (j + i * 9);
             }
 
-            parameters.push(yelp_api.buffer[uuid[i]].name);
-            parameters.push(yelp_api.buffer[uuid[i]].uuid);
-            parameters.push(yelp_api.buffer[uuid[i]].rating);
-            parameters.push(yelp_api.buffer[uuid[i]].url);
-            parameters.push(yelp_api.buffer[uuid[i]].phone);
-            parameters.push(yelp_api.buffer[uuid[i]].image_url);
-            parameters.push(yelp_api.buffer[uuid[i]].display_address);
-            parameters.push(yelp_api.buffer[uuid[i]].coordinate.latitude);
-            parameters.push(yelp_api.buffer[uuid[i]].coordinate.longitude);
+            parameters.push(yelp_api.buffer[uuids[i]].name);
+            parameters.push(yelp_api.buffer[uuids[i]].uuid);
+            parameters.push(yelp_api.buffer[uuids[i]].rating);
+            parameters.push(yelp_api.buffer[uuids[i]].url);
+            parameters.push(yelp_api.buffer[uuids[i]].phone);
+            parameters.push(yelp_api.buffer[uuids[i]].image_url);
+            parameters.push(yelp_api.buffer[uuids[i]].display_address);
+            parameters.push(yelp_api.buffer[uuids[i]].coordinate.latitude);
+            parameters.push(yelp_api.buffer[uuids[i]].coordinate.longitude);
 
-            delete yelp_api.buffer[uuid[i]];
+            delete yelp_api.buffer[uuids[i]];
         }
 
         client.query(query, parameters, function(err, result) {
