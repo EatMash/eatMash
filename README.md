@@ -88,60 +88,7 @@ eatmash.herokuapp.com/api/confirm
 Body
 ```bash
 {
-  "mashups": [
-    {
-      "name": "Kabuki Springs & Spa",
-      "uuid": "9268d3df-687a-41f4-8e88-4292e17d585a",
-      "rating": 4,
-      "url": "http://www.yelp.com/biz/kabuki-springs-and-spa-san-francisco-2?utm_campaign=yelp_api&utm_medium=api_v2_search&utm_source=QfJXdX9KxsuHZ04ruLg3qg",
-      "phone": "4159226000",
-      "image_url": "https://s3-media2.fl.yelpcdn.com/bphoto/e4cqDj8ivh5eKrjcHvq1bQ/ms.jpg",
-      "display_address": [
-        "1750 Geary Blvd",
-        "Japantown",
-        "San Francisco, CA 94115"
-      ],
-      "coordinate": {
-        "latitude": 37.7847114,
-        "longitude": -122.4324242
-      }
-    },
-    {
-      "name": "Kaori Hair Salon",
-      "uuid": "141442a5-9d4b-441c-97ad-5739c23c78b2",
-      "rating": 4.5,
-      "url": "http://www.yelp.com/biz/kaori-hair-salon-san-francisco-2?utm_campaign=yelp_api&utm_medium=api_v2_search&utm_source=QfJXdX9KxsuHZ04ruLg3qg",
-      "phone": "4159901375",
-      "image_url": "https://s3-media2.fl.yelpcdn.com/bphoto/qdY2JF8LzEWNnNtUClUfqQ/ms.jpg",
-      "display_address": [
-        "1832 Buchanan St",
-        "Japantown",
-        "San Francisco, CA 94115"
-      ],
-      "coordinate": {
-        "latitude": 37.7869738,
-        "longitude": -122.4300487
-      }
-    },
-    {
-      "name": "Margaretta Von Recklinghausen",
-      "uuid": "1342472b-3589-4803-a587-db34df660cf2",
-      "rating": 5,
-      "url": "http://www.yelp.com/biz/margaretta-von-recklinghausen-san-francisco-2?utm_campaign=yelp_api&utm_medium=api_v2_search&utm_source=QfJXdX9KxsuHZ04ruLg3qg",
-      "phone": "4152557384",
-      "image_url": "https://s3-media1.fl.yelpcdn.com/bphoto/R1ZdB914I8gtnx41Z4re6Q/ms.jpg",
-      "display_address": [
-        "1801 Bush St",
-        "Ste 207",
-        "Japantown",
-        "San Francisco, CA 94109"
-      ],
-      "coordinate": {
-        "latitude": 37.7875022888184,
-        "longitude": -122.427215576172
-      }
-    }
-  ]
+    "uuid": ["5821f6a2-8fc3-4653-b33b-cb1b256e012f", "bebd8f5f-3a3c-43a0-a30f-b8c504e1af0e"]
 }
 ```
 
