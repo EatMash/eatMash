@@ -64,7 +64,8 @@ var call_yelp_api = function(query_object, location, minrat, callback) {
 			yelp.search(query).then(function(data) {
 				return next(null, randomly_return(data));
 			}).catch(function(err) {
-				throw new Error("Yelp API error: breakfast");
+				return next(null, err);
+				//throw new Error("Yelp API error: breakfast");
 			});
 		},
 		lunch: function(err, res, next) {
@@ -75,7 +76,8 @@ var call_yelp_api = function(query_object, location, minrat, callback) {
 			yelp.search(query).then(function(data) {
 				return next(null, randomly_return(data));
 			}).catch(function(err) {
-				throw new Error("Yelp API error: lunch");
+				return next(null, err);
+				//throw new Error("Yelp API error: lunch");
 			});
 		},
 		dinner: function(err, res, next) {
@@ -86,7 +88,8 @@ var call_yelp_api = function(query_object, location, minrat, callback) {
 			yelp.search(query).then(function(data) {
 				return next(null, randomly_return(data));
 			}).catch(function(err) {
-				throw new Error("Yelp API error: dinner");
+				return next(null, err);
+				//throw new Error("Yelp API error: dinner");
 			});
 		}
 	};

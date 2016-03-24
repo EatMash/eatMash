@@ -81,10 +81,6 @@ app.get('/v2/api', function(req, res) {
     };
 
     yelp_api.call_v2(query_object, location, minimum_rating, function(data) {
-        // TODO
-        // Need to check `data.err` in order to make sure Yelp API returns
-        // correct data without any API errors.
-
         res.setHeader('Content-Type', 'application/json');
         res.send(JSON.stringify(data.res));
     });
