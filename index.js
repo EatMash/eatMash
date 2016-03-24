@@ -15,24 +15,6 @@ app.get('/', function(req, res) {
     res.end();
 });
 
-// app.post('/test', function (req, res) {
-//
-// 	var term = req.body.term;
-// 	var cll = req.body.cll;
-// 	var minimum_rating = req.body.minrat;
-// 	var accepted = req.body.accepted;
-// 	var not_accepted = req.body.not_accepted;
-// 	var num = 1;
-//
-// 	if (minimum_rating == undefined) minimum_rating = 0.0;
-//   	if (isNaN(Number(minimum_rating)) || Number(minimum_rating) < 0 || Number(minimum_rating) > 5.0) {
-// 		res.setHeader('Content-Type', 'application/json');
-// 		res.send(JSON.stringify("{\"statusCode\":400,\"data\":\"{\"error\": {\"text\": \"minimum rating should be a number from 0.0 to 5.0\", \"id\": \"INVALID_PARAMETER\", \"field\": \"minrat\"}}\"}"));
-// 		return;
-// 	}
-//
-// });
-
 //
 // Param validater
 //
@@ -81,6 +63,7 @@ app.get('/v1/api', function(req, res) {
 //  same as /api
 //
 app.get('/v2/api', function(req, res) {
+
     if (!isParametersValid(req, res))
         return;
 
@@ -90,7 +73,6 @@ app.get('/v2/api', function(req, res) {
 
     var location = req.query.location;
     var minimum_rating = req.query.minrat || 0.0;
-    var num = req.query.num || 1;
 
     var query_object = {
         breakfast: breakfast_term,
@@ -98,7 +80,6 @@ app.get('/v2/api', function(req, res) {
         dinner: dinner_term
     };
 
-    console.log(query_object);
     yelp_api.call_v2(query_object, location, minimum_rating, function(data) {
         // TODO
         // Need to check `data.err` in order to make sure Yelp API returns
