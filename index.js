@@ -39,30 +39,10 @@ var isParametersValid = function(req, res) {
         return false;
     }
 
-    return true
+    return true;
 };
 
-//
-// Return params:
-//  name, rating, url, phone, image_url, display_address, coordinate
-//
-app.get('/v1/api', function(req, res) {
-    if (!isParametersValid(req, res))
-        return;
-
-    var term = req.query.term;
-    var location = req.query.location;
-    var minimum_rating = req.query.minrat || 0.0;
-    var num = req.query.num || 1;
-
-    yelp_api.call_v1(term, location, minimum_rating, num, res);
-});
-
-//
-// Return params:
-//  same as /api
-//
-app.get('/v2/api', function(req, res) {
+app.get('/api', function(req, res) {
 
     if (!isParametersValid(req, res))
         return;
