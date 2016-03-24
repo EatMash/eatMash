@@ -66,6 +66,23 @@ app.get('/api', function(req, res) {
     });
 });
 
+app.post('/api/new', function(req, res) {
+
+    var query_object = req.body.query_object;
+    var location = req.body.location;
+    var minimum_rating = req.body.minimum_rating;
+    var uuids = req.body.uuids;
+
+    for (uuid of uuids) {
+        if (uuid in yelp_api.buffer) delete yelp_api.buffer[uuid];
+    }
+
+    yelp_api.call_v2(query_object, location, minimum_rating, function(data) {
+        res.setHeader('Content-Type', 'application/json');
+        res.send(JSON.stringify(data.res));
+    });
+});
+
 app.get('/api/mashups', function(req, res) {
 
     var num = req.query.num;

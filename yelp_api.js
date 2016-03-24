@@ -11,6 +11,8 @@ var yelp = new Yelp({
 	token_secret: config.token_secret
 });
 
+var uuid_buffer = {};
+
 // Filter restaurants
 var filter_restaurants = function(data, minrat) {
 	var candidates = [];
@@ -52,7 +54,9 @@ var call_yelp_api = function(query_object, location, minrat, callback) {
 
 	var randomly_return = function(data) {
 		var restaurants = filter_restaurants(data, minrat);
-		return restaurants[_.random(0, _.size(restaurants) - 1)];
+		var randomly_chosen_restaurant = restaurants[_.random(0, _.size(restaurants) - 1)];
+		uuid_buffer[randomly_chosen_restaurant.uuid] = randomly_chosen_restaurant;
+		return randomly_chosen_restaurant;
 	};
 
 	var meals_obtainer = {
@@ -102,10 +106,8 @@ var call_yelp_api = function(query_object, location, minrat, callback) {
 	}).end();
 };
 
-var uuid_buffer = {};
-
 module.exports = {
-	
+
 	call_v2: call_yelp_api,
 
 	call_v1: function(term, location, minimum_rating, num, res) {
