@@ -11,7 +11,21 @@ var yelp = new Yelp({
 	token_secret: config.token_secret
 });
 
-var uuid_buffer = {};
+var uuidBuffer = new (function() {
+  var buffer = [];
+
+  return {
+    set_uuid_data: function(uuid, data) {
+      buffer[uuid] = data;
+    },
+    delete_uuid: function(uuid) {
+      delete buffer[uuid];
+    },
+    get_all_data: function() {
+      return buffer;
+    }
+  };
+})();
 
 // Filter restaurants
 var filter_restaurants = function(data, minrat) {
@@ -55,7 +69,7 @@ var call_yelp_api = function(query_object, location, minrat, callback) {
 	var randomly_return = function(data) {
 		var restaurants = filter_restaurants(data, minrat);
 		var randomly_chosen_restaurant = restaurants[_.random(0, _.size(restaurants) - 1)];
-		uuid_buffer[randomly_chosen_restaurant.uuid] = randomly_chosen_restaurant;
+		uuidBuffer.set_uuid_data(randomly_chosen_restaurant.uuid, randomly_chosen_restaurant);
 		return randomly_chosen_restaurant;
 	};
 
@@ -158,7 +172,7 @@ module.exports = {
 						while (num > 0 && !_.isEmpty(candidates)) {
 							var random_index = _.random(0, _.size(candidates) - 1);
 							returnValues.push(candidates[random_index]);
-							uuid_buffer[candidates[random_index].uuid] = candidates[random_index];
+							uuidBuffer.set_uuid_data(candidates[random_index].uuid, candidates[random_index]);
 							candidates[random_index] = null;
 							num--;
 							candidates = _.compact(candidates);
@@ -181,5 +195,7 @@ module.exports = {
 			});
 	},
 
-	buffer: uuid_buffer
+	buffer: function() {
+    return uuidBuffer;
+  }
 };

@@ -73,8 +73,11 @@ app.post('/api/new', function(req, res) {
     var minimum_rating = req.body.minimum_rating;
     var uuids = req.body.uuids;
 
+    var buffer = yelp_api.buffer();
     for (uuid of uuids) {
-        if (uuid in yelp_api.buffer) delete yelp_api.buffer[uuid];
+      if (uuid in buffer.get_all_data()) {
+        buffer.delete_uuid(uuid);
+      }
     }
 
     yelp_api.call_v2(query_object, location, minimum_rating, function(data) {
@@ -155,17 +158,19 @@ app.post('/api/confirm', function(req, res) {
                 else query += ", $" + (j + i * 9);
             }
 
-            parameters.push(yelp_api.buffer[uuids[i]].name);
-            parameters.push(yelp_api.buffer[uuids[i]].uuid);
-            parameters.push(yelp_api.buffer[uuids[i]].rating);
-            parameters.push(yelp_api.buffer[uuids[i]].url);
-            parameters.push(yelp_api.buffer[uuids[i]].phone);
-            parameters.push(yelp_api.buffer[uuids[i]].image_url);
-            parameters.push(yelp_api.buffer[uuids[i]].display_address);
-            parameters.push(yelp_api.buffer[uuids[i]].coordinate.latitude);
-            parameters.push(yelp_api.buffer[uuids[i]].coordinate.longitude);
+            buffer = yelp_api.buffer().get_all_data()
 
-            delete yelp_api.buffer[uuids[i]];
+            parameters.push(buffer[uuids[i]].name);
+            parameters.push(buffer[uuids[i]].uuid);
+            parameters.push(buffer[uuids[i]].rating);
+            parameters.push(buffer[uuids[i]].url);
+            parameters.push(buffer[uuids[i]].phone);
+            parameters.push(buffer[uuids[i]].image_url);
+            parameters.push(buffer[uuids[i]].display_address);
+            parameters.push(buffer[uuids[i]].coordinate.latitude);
+            parameters.push(buffer[uuids[i]].coordinate.longitude);
+
+            yelp_api.buffer().delete_uuid(uuids[i]);
         }
 
         client.query(query, parameters, function(err, result) {
