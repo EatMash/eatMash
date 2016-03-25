@@ -1,14 +1,18 @@
 var express = require('express');
 var bodyParser = require('body-parser');
+var pg = require('pg');
+var cors = require('cors');
+
 var yelp_api = require('./yelp_api');
 var Restaurant = require('./restaurant');
 var config = require('./config');
-var pg = require('pg');
 
 var PORT = process.env.PORT || 3000;
 
 var app = express();
+
 app.use(bodyParser());
+app.use(cors());
 
 app.get('/', function(req, res) {
     res.send("Yelp Hackathon Backend Running...");
