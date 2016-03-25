@@ -13,7 +13,7 @@ $ node index.js
 ```
 
 ## Get randomly chosen mashups for the first time (GET)
-Location is required. Breakfast, lunch, dinner menu and minimum rating are optional. By default, minimum rating is 0.0.  
+Location is required. Breakfast, lunch, dinner menu and minimum rating are optional. By default, minimum rating is 0.0.
 ```bash
 eatmash.herokuapp.com/api?breakfast_term="<breakfast menu>"&lunch_term="<lunch menu>"&dinner_term="<dinner menu>"&location="<location>"&minrat=<minimum rating>
 ```
@@ -82,11 +82,11 @@ eatmash.herokuapp.com/api?breakfast_term="american"&lunch_term="italian"&dinner_
 ```
 
 ## Get randomly chosen mashups from the second time (POST)
-When a user does not like a set of randomly chosen mashups, he is given another set of mashups.  
+When a user does not like a set of randomly chosen mashups, he is given another set of mashups.
 ```bash
 eatmash.herokuapp.com/api/new
 ```
-Body. Body includes query_object, location, minimum_rating, and an array of uuids that the user did not like. 
+Body. Body includes query_object, location, minimum_rating, and an array of uuids that the user did not like.
 ```bash
 {
     "query_object": {
@@ -158,19 +158,19 @@ Body. Body includes query_object, location, minimum_rating, and an array of uuid
 ```
 
 ## Confirm the randomly chosen mashups (POST)
-A user confirms a set of randomly created mashups. Then, the mashups are stored in the database. The mashups are sent in a body. 
+A user confirms a set of randomly created mashups. Then, the mashups are stored in the database. The mashups are sent in a body.
 ```bash
 eatmash.herokuapp.com/api/confirm
 ```
 Body
 ```bash
 {
-    "uuid": ["66653cb2-e94a-4e08-b445-c14f60893a1d", "70e2b3b0-29ec-4a67-9354-f578e6f4691e", "352b55d3-9c79-44ef-b415-4b414c40328f"]
+    "uuids": ["66653cb2-e94a-4e08-b445-c14f60893a1d", "70e2b3b0-29ec-4a67-9354-f578e6f4691e", "352b55d3-9c79-44ef-b415-4b414c40328f"]
 }
 ```
 
 ## Get the most recent N mashups (GET)
-Retrieve the most recent N mashups from the database. 
+Retrieve the most recent N mashups from the database.
 ```bash
 eatmash.herokuapp.com/api/mashups?num=<number>
 ```
