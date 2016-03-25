@@ -68,7 +68,7 @@ app.get('/api', function(req, res) {
 
 app.post('/api/new', function(req, res) {
 
-    var query_object = req.body.query_object;
+    var query_object = req.body.query_object || {};
     var location = req.body.location;
     var minimum_rating = req.body.minimum_rating;
     var uuids = req.body.uuids;
