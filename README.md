@@ -1,4 +1,5 @@
 # eatMash
+EatMash is a mashup that helps you enjoy local food during your trip. EatMash mashes up local restaurants near your location and suggests breakfast, lunch and dinner based on your request such as minimum rating and type of cuisine. 
 
 ## Setup
 Install npm packages
